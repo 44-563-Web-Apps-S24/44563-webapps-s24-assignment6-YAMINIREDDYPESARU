@@ -1,43 +1,65 @@
 <!DOCTYPE html>
 <html>
- <title>WwbApps Assignment 06</title>
+    <head>
+        <title>WebApps Assignment 06</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel=”stylesheet” href=”https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css”
+        rel=”nofollow” integrity=”sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I”
+        crossorigin=”anonymous”>
+    </head>
 <body>
+    <div class="container">
 <h1>Animal game by  Yamini Reddy Pesaru</h1>
-<h2>Getting input</h2>
+
 
 <form>
-    <label for="hidden-animal">The hidden animal type:</label>
-    <input type ="password" id="hidden-animal" value="Chicken"> <br>
-    <label for="guess-animal">Guess the animal:</label>
-    <input type ="text" id="guess-animal"> <br>
-    <button type="button" onclick="checkAnimal()">Check the guess</button>
+    <div class="set">
+        <label for="form1_hidden_animal">The hidden animal type</label>
+        <input class="form-control" type="password" id="form1_hidden_animal" name="form1_hidden_animal" value="Chicken"> <br>
+    </div>
+    <div class="set">
+        <label for="form1_guess_animal">Guess the animal</label>
+        <input class="form-control" type="text" id="form1_guess_animal" name="form1_guess_animal" autofocus> <br>
+    </div>
+    <input type="button" class="button" id="btn" onclick="checkAnimal()" value="Check the guess">
 </form>
-<p id="result"></p>
 
-<div class="container">
+
+<p id="result">This text will be replaced</p>
+
+<div class="image-container" onclick="collapse">
     <img src="apple.jpg" height="150px" width="150px" onclick="selectImage()" id="drinkImage">
 </div>
-
+</div>
 <script>
-let correct=0;
-let wrong=0;
+let wrong = 0
+let correct = 0
+let useImage = 1;
 
-function checkAnimal(){
-        const hiddenAnimal = document.getElementById("hidden-animal").value;
-        const guessedAnimal =document.getElementById("guess-animal").value;
+function checkAnimal() {
+    hidden = document.getElementById("form1_hidden_animal").value
+    guess = document.getElementById("form1_guess_animal").value
+    button = document.getElementById("btn")
 
-    if(hiddenAnimal.toLowerCase() === guessedAnimal.toLowerCase()){
-        correct++;
-       alert("Ruff ruff")
+
+    out = document.getElementById("result")
+    if (hidden === guess) {
+        alert("Ruff ruff")
+        correct++
     } else {
-        wrong++;
         alert("Grrrr")
-       
+        wrong++
     }
-    document.getElementById('result').innerHTML = "Correct:" +$(correct)+", Wrong: "+$(wrong);
+    if (wrong > correct)
+        button.setAttribute('onclick', 'tooManyWrong()')
+    out.innerHTML = "Correct: " + correct + " Wrong: " + wrong
 }
 
-let useImage = 1
+
+function tooManyWrong() {
+    alert("Sorry, too many wrong guesses.")
+
+}
     function selectImage(){
         switch(useImage) {
             case 1:
@@ -53,6 +75,10 @@ let useImage = 1
                 useImage = 1
                 break
         }
+    }
+
+    function tooManyWrong() {
+        alert("Sorry, too many wrong guesses.");
     }
 </script>
 </body>
